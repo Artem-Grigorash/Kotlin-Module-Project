@@ -1,8 +1,8 @@
 fun printCommandList() {
     println("-----------------------------------------")
-    println("Command list:\n--For archives:--\n${Commands.CrAr} \n${Commands.ShAr} \n${Commands.DeAr} \n${Commands.OpAr}")
-    println("--For notes:--\n${Commands.CrNo} \n${Commands.ShNo} \n${Commands.DeNo} \n${Commands.OpNo} \n${Commands.ReNo}\n${Commands.ClNo}")
-    println("--For navigation:--\n${Commands.BACK} \n${Commands.ShCo}")
+    println("Command list:\n--For archives:--\n${Commands.CrAr.com} \n${Commands.ShAr.com} \n${Commands.DeAr.com} \n${Commands.OpAr.com}")
+    println("--For notes:--\n${Commands.CrNo.com} \n${Commands.ShNo.com} \n${Commands.DeNo.com} \n${Commands.OpNo.com} \n${Commands.ReNo.com}\n${Commands.ClNo.com}")
+    println("--For navigation:--\n${Commands.BACK.com} \n${Commands.ShCo.com}")
     println("-----------------------------------------")
 }
 
