@@ -1,12 +1,10 @@
 data class Archives(
     var listsOfNotes: HashMap<String, NotesList> = HashMap(),
-    var listNames: HashSet<String> = HashSet()
-) : Choise(title = "NoteList", list = listNames) {
+) : Scan(), Choise {
     private var lastOpened: NotesList? = null
 
     fun createNotesList() {
         val title = getTitle(Variants.IAE.variant)
-        listNames.add(title)
         listsOfNotes[title] = NotesList(title)
         println("The archive was created successfully")
         showElements()
@@ -14,7 +12,6 @@ data class Archives(
 
     fun deleteNoteList() {
         val title = getTitle(Variants.INE.variant)
-        listNames.remove(title)
         listsOfNotes.remove(title)
         println("Archive successfully deleted")
         showElements()
@@ -53,5 +50,34 @@ data class Archives(
     fun backFromNoteList() {
         lastOpened = null
         showElements()
+    }
+
+    override fun showElements() {
+        println("Archives:")
+        var position = 1
+        for (element in listsOfNotes.keys)
+            println("${position++}. $element")
+        if (listsOfNotes.size == 0)
+            println("now is empty")
+    }
+
+    override fun getTitle(variant: String): String {
+        println("Enter the title")
+        var title: String = read.nextLine()
+        when (variant) {
+            Variants.INE.variant -> {
+                while (!listsOfNotes.containsKey(title)) {
+                    println(variant)
+                    title = read.nextLine()
+                }
+            }
+            Variants.IAE.variant -> {
+                while (listsOfNotes.containsKey(title)) {
+                    println(variant)
+                    title = read.nextLine()
+                }
+            }
+        }
+        return title
     }
 }
