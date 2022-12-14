@@ -3,97 +3,98 @@ import java.util.*
 fun main() {
     val read = Scanner(System.`in`)
     val archive = Archives()
-    var screen = "start"
+    var screen = Screens.S.scr
     var flag = true
     println("Let`s start")
     printCommandList()
-    archive.showNotesLists()
+    archive.showElements()
     var command = read.nextLine()
-    while (flag){
-        when (command){
-            "Create Archive" -> {
-                if (screen == "start")
+    while (flag) {
+        when (command) {
+            Commands.CrAr.com -> {
+                if (screen == Screens.S.scr)
                     archive.createNotesList()
                 else
-                    println("First get back to archives list")
+                    println(Screens.GB.scr)
             }
-            "Show Archives" -> {
-                if (screen == "start")
-                    archive.showNotesLists()
+            Commands.ShAr.com -> {
+                if (screen == Screens.S.scr)
+                    archive.showElements()
                 else
-                    println("First get back to archives list")
+                    println(Screens.GB.scr)
             }
-            "Delete Archive" -> {
-                if (screen == "start")
+            Commands.DeAr.com -> {
+                if (screen == Screens.S.scr)
                     archive.deleteNoteList()
                 else
-                    println("First get back to archives list")
+                    println(Screens.GB.scr)
             }
-            "Open Archive" -> {
-                if (screen == "start") {
+            Commands.OpAr.com -> {
+                if (screen == Screens.S.scr) {
                     archive.openNoteList()
-                    screen = "noteList"
-                }
-                else
-                    println("First get back to archives list")
+                    screen = Screens.L.scr
+                } else
+                    println(Screens.GB.scr)
             }
 
-            "Create Note" -> {
-                if (screen == "noteList")
+            Commands.CrNo.com -> {
+                if (screen == Screens.L.scr)
                     archive.makeNewNote()
                 else
-                    println("First open the archive")
+                    println(Screens.O.scr)
             }
-            "Show Notes" -> {
-                if (screen == "noteList")
+            Commands.ShNo.com -> {
+                if (screen == Screens.L.scr)
                     archive.showMyNotes()
                 else
-                    println("First open the archive")
+                    println(Screens.O.scr)
             }
-            "Delete Note" -> {
-                if (screen == "noteList")
+            Commands.DeNo.com -> {
+                if (screen == Screens.L.scr)
                     archive.deleteMyNote()
                 else
-                    println("First open the archive")
+                    println(Screens.O.scr)
             }
-            "Open Note" -> {
-                if (screen == "noteList") {
+            Commands.OpNo.com -> {
+                if (screen == Screens.L.scr) {
                     archive.openMyNote()
-                    screen = "note"
-                }
-                else
-                    println("First open the archive")
+                    screen = Screens.N.scr
+                } else
+                    println(Screens.O.scr)
             }
-            "Redact Note" -> {
-                if (screen == "noteList")
+            Commands.ReNo.com -> {
+                if (screen == Screens.L.scr)
                     archive.redactMyNote()
                 else
-                    println("First open the archive")
+                    println(Screens.O.scr)
             }
-            "Clean Note" -> {
-                if (screen == "noteList")
+            Commands.ClNo.com -> {
+                if (screen == Screens.L.scr)
                     archive.cleanMyNote()
                 else
-                    println("First open the archive")
+                    println(Screens.O.scr)
             }
 
-            "Back" -> {
+            Commands.BACK.com -> {
                 when (screen) {
-                    "start" -> flag=false
-                    "noteList" -> {
+                    Screens.S.scr -> flag = false
+                    Screens.L.scr -> {
                         archive.backFromNoteList()
-                        screen = "start"
+                        screen = Screens.S.scr
                     }
-                    "note" -> {
+                    Screens.N.scr -> {
                         archive.showMyNotes()
-                        screen = "noteList"
+                        screen = Screens.L.scr
                     }
                 }
+            }
+            Commands.ShCo.com -> {
+                printCommandList()
             }
 
             else -> println("!Wrong command!")
         }
         if (flag)
-        command = read.nextLine()
+            command = read.nextLine()
     }
 }

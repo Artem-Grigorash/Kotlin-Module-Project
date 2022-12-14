@@ -1,55 +1,57 @@
 data class Archives(
-    var listsOfNotes : HashMap<String, NotesList> = HashMap(),
+    var listsOfNotes: HashMap<String, NotesList> = HashMap(),
     var listNames: HashSet<String> = HashSet()
-):Choise(title = "NoteList", list = listNames)
-{
-    private var lastOpened : NotesList? = null
+) : Choise(title = "NoteList", list = listNames) {
+    private var lastOpened: NotesList? = null
 
-    fun createNotesList(){
+    fun createNotesList() {
         val title = getTitle(2)
         listNames.add(title)
         listsOfNotes[title] = NotesList(title)
         println("The archive was created successfully")
-        showNotesLists()
-    }
-
-    fun showNotesLists() {
         showElements()
     }
 
-    fun deleteNoteList(){
+    fun deleteNoteList() {
         val title = getTitle(1)
         listNames.remove(title)
         listsOfNotes.remove(title)
         println("Archive successfully deleted")
-        showNotesLists()
+        showElements()
     }
 
-    fun openNoteList(){
+    fun openNoteList() {
         val title = getTitle(1)
-        listsOfNotes[title]?.showNotes()
-        lastOpened= listsOfNotes[title]
+        listsOfNotes[title]?.showElements()
+        lastOpened = listsOfNotes[title]
     }
-    fun makeNewNote(){
+
+    fun makeNewNote() {
         lastOpened?.createNote()
     }
-    fun showMyNotes(){
-        lastOpened?.showNotes()
+
+    fun showMyNotes() {
+        lastOpened?.showElements()
     }
-    fun deleteMyNote(){
+
+    fun deleteMyNote() {
         lastOpened?.deleteNote()
     }
-    fun openMyNote(){
+
+    fun openMyNote() {
         lastOpened?.openNote()
     }
-    fun redactMyNote(){
+
+    fun redactMyNote() {
         lastOpened?.redactNote()
     }
-    fun cleanMyNote(){
+
+    fun cleanMyNote() {
         lastOpened?.cleanNote()
     }
-    fun backFromNoteList(){
-        lastOpened=null
-        showNotesLists()
+
+    fun backFromNoteList() {
+        lastOpened = null
+        showElements()
     }
 }
