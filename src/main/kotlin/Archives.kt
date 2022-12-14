@@ -5,7 +5,7 @@ data class Archives(
     private var lastOpened: NotesList? = null
 
     fun createNotesList() {
-        val title = getTitle(2)
+        val title = getTitle(Variants.IAE.variant)
         listNames.add(title)
         listsOfNotes[title] = NotesList(title)
         println("The archive was created successfully")
@@ -13,7 +13,7 @@ data class Archives(
     }
 
     fun deleteNoteList() {
-        val title = getTitle(1)
+        val title = getTitle(Variants.INE.variant)
         listNames.remove(title)
         listsOfNotes.remove(title)
         println("Archive successfully deleted")
@@ -21,7 +21,7 @@ data class Archives(
     }
 
     fun openNoteList() {
-        val title = getTitle(1)
+        val title = getTitle(Variants.INE.variant)
         listsOfNotes[title]?.showElements()
         lastOpened = listsOfNotes[title]
     }

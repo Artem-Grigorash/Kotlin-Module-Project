@@ -13,22 +13,19 @@ open class Choise(
             println("now is empty")
     }
 
-    fun getTitle(variant: Int): String {
-        val text: String
+    fun getTitle(variant: String): String {
         println("Enter the title")
         var title: String = read.nextLine()
         when (variant) {
-            1 -> {
-                text = "Title is not exist"
+            Variants.INE.variant -> {
                 while (!list.contains(title)) {
-                    println(text)
+                    println(variant)
                     title = read.nextLine()
                 }
             }
-            2 -> {
-                text = "Title is already exist"
+            Variants.IAE.variant -> {
                 while (list.contains(title)) {
-                    println(text)
+                    println(variant)
                     title = read.nextLine()
                 }
             }

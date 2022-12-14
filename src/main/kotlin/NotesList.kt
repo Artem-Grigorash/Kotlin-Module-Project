@@ -4,7 +4,7 @@ open class NotesList(
     private var noteNames: HashSet<String> = HashSet()
 ) : Choise(title = name, list = noteNames) {
     fun createNote() {
-        val title = getTitle(2)
+        val title = getTitle(Variants.IAE.variant)
         println("Enter the text")
         val text: String = read.nextLine()
         noteNames.add(title)
@@ -14,25 +14,25 @@ open class NotesList(
     }
 
     fun deleteNote() {
-        val title = getTitle(1)
+        val title = getTitle(Variants.INE.variant)
         noteNames.remove(title)
         notes.remove(title)
         showElements()
     }
 
     fun openNote() {
-        val title = getTitle(1)
+        val title = getTitle(Variants.INE.variant)
         notes[title]?.showNote()
     }
 
     fun redactNote() {
-        val title = getTitle(1)
+        val title = getTitle(Variants.INE.variant)
         notes[title]?.showNote()
         notes[title]?.addText()
     }
 
     fun cleanNote() {
-        val title = getTitle(1)
+        val title = getTitle(Variants.INE.variant)
         notes[title]?.removeText()
     }
 }
