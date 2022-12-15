@@ -1,55 +1,83 @@
 data class Archives(
-    var listsOfNotes : HashMap<String, NotesList> = HashMap(),
-    var listNames: HashSet<String> = HashSet()
-):Choise(title = "NoteList", list = listNames)
-{
-    private var lastOpened : NotesList? = null
+    var listsOfNotes: HashMap<String, NotesList> = HashMap(),
+) : Scan(), Choise {
+    private var lastOpened: NotesList? = null
 
-    fun createNotesList(){
-        val title = getTitle(2)
-        listNames.add(title)
+    fun createNotesList() {
+        val title = getTitle(Variants.IAE.variant)
         listsOfNotes[title] = NotesList(title)
         println("The archive was created successfully")
-        showNotesLists()
-    }
-
-    fun showNotesLists() {
         showElements()
     }
 
-    fun deleteNoteList(){
-        val title = getTitle(1)
-        listNames.remove(title)
+    fun deleteNoteList() {
+        val title = getTitle(Variants.INE.variant)
         listsOfNotes.remove(title)
         println("Archive successfully deleted")
-        showNotesLists()
+        showElements()
     }
 
-    fun openNoteList(){
-        val title = getTitle(1)
-        listsOfNotes[title]?.showNotes()
-        lastOpened= listsOfNotes[title]
+    fun openNoteList() {
+        val title = getTitle(Variants.INE.variant)
+        listsOfNotes[title]?.showElements()
+        lastOpened = listsOfNotes[title]
     }
-    fun makeNewNote(){
+
+    fun makeNewNote() {
         lastOpened?.createNote()
     }
-    fun showMyNotes(){
-        lastOpened?.showNotes()
+
+    fun showMyNotes() {
+        lastOpened?.showElements()
     }
-    fun deleteMyNote(){
+
+    fun deleteMyNote() {
         lastOpened?.deleteNote()
     }
-    fun openMyNote(){
+
+    fun openMyNote() {
         lastOpened?.openNote()
     }
-    fun redactMyNote(){
+
+    fun redactMyNote() {
         lastOpened?.redactNote()
     }
-    fun cleanMyNote(){
+
+    fun cleanMyNote() {
         lastOpened?.cleanNote()
     }
-    fun backFromNoteList(){
-        lastOpened=null
-        showNotesLists()
+
+    fun backFromNoteList() {
+        lastOpened = null
+        showElements()
+    }
+
+    override fun showElements() {
+        println("Archives:")
+        var position = 1
+        for (element in listsOfNotes.keys)
+            println("${position++}. $element")
+        if (listsOfNotes.size == 0)
+            println("now is empty")
+    }
+
+    override fun getTitle(variant: String): String {
+        println("Enter the title")
+        var title: String = read.nextLine()
+        when (variant) {
+            Variants.INE.variant -> {
+                while (!listsOfNotes.containsKey(title)) {
+                    println(variant)
+                    title = read.nextLine()
+                }
+            }
+            Variants.IAE.variant -> {
+                while (listsOfNotes.containsKey(title)) {
+                    println(variant)
+                    title = read.nextLine()
+                }
+            }
+        }
+        return title
     }
 }
